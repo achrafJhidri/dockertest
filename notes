@@ -5,4 +5,18 @@ docker run -p 80:80 --name mycontainerName myapp to start a container from myapp
 
 docker start id to start container id; stop     
 
-docker run --mount type=bind,source="$(pwd)/myBackend/src",target=/app/src -p 80:80 --name=mycnt  myimg to start a container with volume type bind
+docker run --mount 
+    --rm pour qu'il soit supprimer automatiquement après stop
+    type=volume,source=volumeName,target=\\windowsPath use \ this instead of /
+    -p 80:80 
+    --name=mycnt
+    myimg
+     to start a container with volume type volume
+
+Or if you want to share the same volume as another container cnt1
+
+docker run 
+    --volumes-from cnt1IdorName
+    --name=mycnt2
+    myimg
+    to start a container with volume type volume
