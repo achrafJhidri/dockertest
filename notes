@@ -20,3 +20,16 @@ docker run
     --name=mycnt2
     myimg
     to start a container with volume type volume
+
+
+
+
+how to link two containers when we're using bridge mode 
+    docker run --rm --name s1 --link s2 -it alpine sh  you have to give one of them  a name  bidirectional !
+    docker run --rm --name s2 --link s1 -it alpine sh            and link the second !      frm both sides
+
+
+or create your own network and connect containers to it !
+    docker network create mynet
+    docker run --rm --name s1 --net mynet -it alpine sh
+    docker run --rm --name s2 --net mynet -it alpine sh  now they're capable to speak by names
