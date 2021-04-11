@@ -1,0 +1,8 @@
+
+docker build -t imagename:tag . to build the ./dockerfile with imagename = imagname:tag 
+
+docker run -p 80:80 --name mycontainerName myapp to start a container from myapp-image with binding port 80:80
+
+docker start id to start container id; stop     
+
+docker run --mount type=bind,source="$(pwd)/myBackend/src",target=/app/src -p 80:80 --name=mycnt  myimg to start a container with volume type bind
