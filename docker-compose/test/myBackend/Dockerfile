@@ -10,4 +10,4 @@ COPY . .
 
 ENV PATH=/app/node_modules/.bin:$PATH
 
-CMD ["nodemon","src/app.js"] 
+CMD ["nodemon","--legacy-watch","src/app.js"] 

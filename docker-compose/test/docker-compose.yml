@@ -1,0 +1,43 @@
+version: "3.8"
+services: 
+    a:
+        image: alpine
+        # command: ["ping","google.fr"]
+    b:
+        # links :
+        #     - "a:backend"
+        # env_file: 
+        #     - .env
+        # environment: 
+        #     - HOMEPATH
+        # command: ['ping',"google.fr"]
+        container_name: backend
+        build:
+            context: ./myBackend
+            dockerfile: Dockerfile
+            # args: 
+            #     FOLDER: myfolder
+            labels: 
+                - email=achrafjh@gmail.com
+        ports: 
+            - 80:80
+        volumes: 
+            - type: bind
+              source : ./data
+              target: /app/data
+            # - type: volume
+            #   source: datavolume
+            #   target: /app/datavolume
+            # - type: volume
+            #   target: /app/datavolumeAnonymous
+        networks: 
+            - 'frontend'
+# volumes: 
+    # datavolume:
+    #     external: true
+networks: 
+    default:
+        name: mynetwork
+    frontend:
+        driver: bridge
+
