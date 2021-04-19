@@ -2,7 +2,9 @@ const express = require("express");
 const MongoClient = require("mongodb").MongoClient;
 let count ;
 
-MongoClient.connect("mongodb://db",{useUnifiedTopology:true},(err,client) =>{
+MongoClient.connect(
+    `mongodb://${process.env.MONGO_USERNAME}:${process.env.MONGO_PWD}@db`
+    ,{useUnifiedTopology:true},(err,client) =>{
     if (err)
         console.log(err);
     else
@@ -13,7 +15,7 @@ MongoClient.connect("mongodb://db",{useUnifiedTopology:true},(err,client) =>{
 
 const app = express();
 
-app.get("*",(req,res) => {
+app.get("/",(req,res) => {
     count.findOneAndUpdate({},{$inc :  {count : 1 }},{returnNewDocument:true})
     .then((doc) =>{
         const cnt = doc.value.count;

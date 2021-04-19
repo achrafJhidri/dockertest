@@ -1,12 +1,18 @@
 version: "3.8"
 services: 
     db:
+        # environment: 
+        #    - MONGO_INITDB_ROOT_USERNAME
+        #    - MONGO_INITDB_ROOT_PASSWORD
         image: mongo
         volumes: 
             - type: volume
               source: mydb
               target: /data/db
     server:
+        environment: 
+            - MONGO_PWD
+            - MONGO_USERNAME
         build: .
         ports: 
             - 80:80
