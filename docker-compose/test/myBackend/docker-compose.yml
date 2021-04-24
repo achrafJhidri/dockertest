@@ -9,6 +9,7 @@ services:
             - type: volume
               source: mydb
               target: /data/db
+        restart: always
     server:
         environment: 
             - MONGO_PWD
@@ -20,6 +21,9 @@ services:
             - type: bind
               source: ./src
               target: /app/src   
+        depends_on: 
+            - db
+        restart: on_failure
 volumes:
     mydb:
         external: true
